@@ -8,8 +8,12 @@ ________________________________
 ________________________________
 
 OKAY. I HAVE ADDED THIS TASK:
- [T] [ ] buy food
+ [E] [ ] project meeting (from: Mon 2pm to: 4pm)
 NOW YOU HAVE 1 TASK IN THE LIST.
+
+________________________________
+
+THANK YOU FOR YOUR ATTENTION TO THIS MATTER!
 
 ________________________________
 

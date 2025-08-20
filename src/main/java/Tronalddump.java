@@ -9,17 +9,10 @@ public class Tronalddump {
         System.out.println("________________________________\n");
         Task[] list = new Task[100];
         int index = 0;
-        while (true) {
-            String input;
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
-//            if (scanner.hasNextLine()) {
-//                input = scanner.nextLine();
-//                // process input
-//            } else {
-//                break; // or handle end of input
-//            }
+        Scanner scanner = new Scanner(System.in);
 
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
             String[] parts = input.split(" ");
             System.out.println("________________________________\n");
             if (input.equalsIgnoreCase("bye")) {
