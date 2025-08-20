@@ -42,14 +42,31 @@ public class Tronalddump {
                 }
             }
             else {
-                if (parts[0].equals("todo")) {
+                if (parts[0].equalsIgnoreCase("todo")) {
+                    if (parts.length == 1) {
+                        System.out.println("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE TODO TASK!");
+                        System.out.println("________________________________\n");
+                        continue;
+                    }
                     list[index++] = new Todo(input.substring(5));
-                } else if (parts[0].equals("event")) {
+                } else if (parts[0].equalsIgnoreCase("event")) {
+                    if (parts.length == 1) {
+                        System.out.println("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE EVENT TASK!");
+                        System.out.println("________________________________\n");
+                        continue;
+                    }
                     list[index++] = new Event(input.substring(6));
-                } else if (parts[0].equals("deadline")) {
+                } else if (parts[0].equalsIgnoreCase("deadline")) {
+                    if (parts.length == 1) {
+                        System.out.println("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE DEADLINE TASK!");
+                        System.out.println("________________________________\n");
+                        continue;
+                    }
                     list[index++] = new Deadline(input.substring(9));
                 } else {
-                    list[index++] = new Task(input);
+                    System.out.println("I HATE DEMOCRATS! I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!");
+                    System.out.println("________________________________\n");
+                    continue;
                 }
                 String formatted = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s", list[index - 1].toString());
                 System.out.println(formatted);
