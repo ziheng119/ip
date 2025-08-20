@@ -1,4 +1,32 @@
-package PACKAGE_NAME;
+public class Event extends Task{
+    private String startDateTime;
+    private String endDateTime;
 
-public class Event {
+    public Event(String description) {
+        super(description.split(" /from ")[0]);
+        String[] getEndTime = description.split(" /to ");
+        this.endDateTime = getEndTime[getEndTime.length - 1];
+        String[] getStartTime = getEndTime[0].split(" /from ");
+        this.startDateTime = getStartTime[getStartTime.length - 1];
+    }
+
+    public void setStartDateTime(String startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+    public void setEndDateTime(String endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public String getStartDateTime() {
+        return startDateTime;
+    }
+
+    public String getEndDateTime() {
+        return endDateTime;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[E] %s (from: %s to: %s)", super.toString(), startDateTime, endDateTime);
+    }
 }
