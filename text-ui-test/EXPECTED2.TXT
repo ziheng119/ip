@@ -13,6 +13,28 @@ NOW YOU HAVE 1 TASK IN THE LIST.
 
 ________________________________
 
+________________________________
+
+HERE ARE THE TASKS IN YOUR LIST:
+1. [E] [ ] project meeting (from: Mon 2pm to: 4pm)
+________________________________
+
+________________________________
+
+TASK 1 IS UNMARKED.
+
+[E] [ ] project meeting (from: Mon 2pm to: 4pm)
+________________________________
+
+________________________________
+
+GOOD JOB! TASK 1 IS MARKED AS DONE.
+
+[E] [X] project meeting (from: Mon 2pm to: 4pm)
+________________________________
+
+________________________________
+
 THANK YOU FOR YOUR ATTENTION TO THIS MATTER!
 
 ________________________________

@@ -13,6 +13,24 @@ NOW YOU HAVE 1 TASK IN THE LIST.
 
 ________________________________
 
+________________________________
+
+OKAY. I HAVE ADDED THIS TASK:
+ [D] [ ] return book (by: Sunday)
+NOW YOU HAVE 2 TASKS IN THE LIST.
+
+________________________________
+
+________________________________
+
+OKAY. I HAVE ADDED THIS TASK:
+ [E] [ ] project meeting (from: Mon 2pm to: 4pm)
+NOW YOU HAVE 3 TASKS IN THE LIST.
+
+________________________________
+
+________________________________
+
 THANK YOU FOR YOUR ATTENTION TO THIS MATTER!
 
 ________________________________
