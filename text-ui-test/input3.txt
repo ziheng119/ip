@@ -1,7 +1,8 @@
-todo
-event
-deadline
-todo eat bread
-list
+todo read book
+deadline return book /by 2025-01-03 2359
+event project meeting /from 2025-01-04 1800 /to 2025-01-04
 delete 1
+list
+delete 5
+mark
 bye
