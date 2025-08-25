@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Tronalddump {
+public class TronaldDump {
     public static void main(String[] args) {
         System.out.println("________________________________\n");
         System.out.println("GOOD MORNING! I AM TRONALD DUMP! GOD BLESS AMERICA\n"
