@@ -2,8 +2,8 @@ public class Event extends Task{
     private String startDateTime;
     private String endDateTime;
 
-    public Event(String description) {
-        super(description.split(" /from ")[0]);
+    public Event(String description, boolean isDone) {
+        super(description.split(" /from ")[0], isDone);
         String[] getEndTime = description.split(" /to ");
         this.endDateTime = getEndTime[getEndTime.length - 1];
         String[] getStartTime = getEndTime[0].split(" /from ");
@@ -23,6 +23,11 @@ public class Event extends Task{
 
     public String getEndDateTime() {
         return endDateTime;
+    }
+
+    @Override
+    public String toStorageString() {
+        return "E | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /from " + this.startDateTime + " /to " + this.endDateTime;
     }
 
     @Override

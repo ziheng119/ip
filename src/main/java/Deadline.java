@@ -1,8 +1,8 @@
 public class Deadline extends Task{
     private String deadline;
 
-    public Deadline(String description) {
-        super(description.split(" /by ")[0]);
+    public Deadline(String description, boolean isDone) {
+        super(description.split(" /by ")[0], isDone);
         String[] parts = description.split(" /by ");
         this.deadline = parts[1];
     }
@@ -10,8 +10,14 @@ public class Deadline extends Task{
     public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
+
     public String getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public String toStorageString() {
+        return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by " + this.deadline;
     }
 
     @Override

@@ -1,10 +1,10 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getDescription() {
@@ -21,6 +21,22 @@ public class Task {
 
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    public abstract String toStorageString();
+
+    public static Task fromStorageString(String line) {
+        String[] parts = line.split(" \\| ");
+        switch (parts[0]) {
+            case "T":
+                return new Todo(parts[2], parts[1].equals("1"));
+            case "D":
+                return new Deadline(parts[2], parts[1].equals("1"));
+            case "E":
+                return new Event(parts[2], parts[1].equals("1"));
+            default:
+                throw new IllegalArgumentException("Unknown task type: " + parts[0]);
+        }
     }
 
     @Override
