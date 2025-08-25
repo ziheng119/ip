@@ -29,7 +29,7 @@ java -classpath ../bin Tronalddump < input2.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED2.TXT EXPECTED2-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+dos2unix ACTUAL.TXT EXPECTED2-UNIX.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED2-UNIX.TXT
