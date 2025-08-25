@@ -25,7 +25,10 @@ public class Tronalddump {
                         System.out.println(String.format("%d. %s", i + 1, list.get(i).toString()));
                     }
                     System.out.println("________________________________\n");
-                } else if (parts.length == 2 && parts[0].equalsIgnoreCase("mark")) {
+                } else if (parts[0].equalsIgnoreCase("mark")) {
+                    if (parts.length != 2) {
+                        throw new TronaldDumpException("Please specify the task number to mark.");
+                    }
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     if (taskNumber >= 0 && taskNumber < list.size()) {
                         list.get(taskNumber).markAsDone();
@@ -35,7 +38,10 @@ public class Tronalddump {
                     } else {
                         throw new TronaldDumpException("Invalid task number.");
                     }
-                } else if (parts.length == 2 && parts[0].equalsIgnoreCase("unmark")) {
+                } else if (parts[0].equalsIgnoreCase("unmark")) {
+                    if (parts.length != 2) {
+                        throw new TronaldDumpException("Please specify the task number to unmark.");
+                    }
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     if (taskNumber >= 0 && taskNumber < list.size()) {
                         list.get(taskNumber).markAsNotDone();
@@ -53,7 +59,6 @@ public class Tronalddump {
                         System.out.println(String.format("NOW YOU HAVE %d %s IN THE LIST.\n", list.size(), list.size() == 1 ? "TASK" : "TASKS"));
                         System.out.println("________________________________\n");
                     } else {
-
                         throw new TronaldDumpException("Invalid task number.");
                     }
                 } else {
@@ -73,7 +78,8 @@ public class Tronalddump {
                         }
                         list.add(new Deadline(input.substring(9), false));
                     } else {
-                        throw new TronaldDumpException("I HATE DEMOCRATS! I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!");
+                        throw new TronaldDumpException("I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!" +
+                                "\nELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
                     }
                     storage.save(list);
                     String formatted = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s", list.get(list.size() - 1).toString());
