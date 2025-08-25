@@ -8,7 +8,8 @@ public class Tronalddump {
         System.out.println("GOOD MORNING! I AM TRONALD DUMP! GOD BLESS AMERICA\n"
                 + "WHAT CAN I, THIS BEAUTIFUL MAN, DO FOR YOU?\n");
         System.out.println("________________________________\n");
-        ArrayList<Task> list = new ArrayList<>();
+        Storage storage = new Storage();
+        ArrayList<Task> list = storage.load();
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNextLine()) {
@@ -60,25 +61,27 @@ public class Tronalddump {
                         if (parts.length == 1) {
                             throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE TODO TASK!");
                         }
-                        list.add(new Todo(input.substring(5)));
+                        list.add(new Todo(input.substring(5), false));
                     } else if (parts[0].equalsIgnoreCase("event")) {
                         if (parts.length == 1) {
                             throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE EVENT TASK!");
                         }
-                        list.add(new Event(input.substring(6)));
+                        list.add(new Event(input.substring(6), false));
                     } else if (parts[0].equalsIgnoreCase("deadline")) {
                         if (parts.length == 1) {
                             throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE DEADLINE TASK!");
                         }
-                        list.add(new Deadline(input.substring(9)));
+                        list.add(new Deadline(input.substring(9), false));
                     } else {
                         throw new TronaldDumpException("I HATE DEMOCRATS! I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!");
                     }
+                    storage.save(list);
                     String formatted = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s", list.get(list.size() - 1).toString());
                     System.out.println(formatted);
                     System.out.println(String.format("NOW YOU HAVE %d %s IN THE LIST.\n", list.size(), list.size() == 1 ? "TASK" : "TASKS"));
                     System.out.println("________________________________\n");
                 }
+                storage.save(list);
             } catch (TronaldDumpException e) {
                 System.out.println(e.getMessage());
                 System.out.println("________________________________\n");
