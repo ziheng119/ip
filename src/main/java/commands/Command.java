@@ -1,4 +1,8 @@
+package commands;
 
+import core.TaskList;
+import util.Storage;
+import util.TronaldDumpException;
 
 public abstract class Command {
     protected TaskList taskList;

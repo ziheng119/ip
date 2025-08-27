@@ -1,3 +1,5 @@
+package core;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -13,21 +15,21 @@ public class TaskList {
 
     public void addTask(Task task) {
         if (task == null) {
-            throw new IllegalArgumentException("Task cannot be null");
+            throw new IllegalArgumentException("core.Task cannot be null");
         }
         tasks.add(task);
     }
 
     public Task getTask(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException("Task index " + (index + 1) + " is out of bounds");
+            throw new IndexOutOfBoundsException("core.Task index " + (index + 1) + " is out of bounds");
         }
         return tasks.get(index);
     }
 
     public Task removeTask(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException("Task index " + (index + 1) + " is out of bounds");
+            throw new IndexOutOfBoundsException("core.Task index " + (index + 1) + " is out of bounds");
         }
         return tasks.remove(index);
     }

@@ -1,19 +1,26 @@
-public class DeleteCommand extends Command {
+package commands;
+
+import core.TaskList;
+import core.Ui;
+import util.Storage;
+import util.TronaldDumpException;
+
+public class UnmarkCommand extends Command {
     
-    public DeleteCommand(TaskList taskList, Storage storage) {
+    public UnmarkCommand(TaskList taskList, Storage storage) {
         super(taskList, storage);
     }
     
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
         if (parts.length != 2) {
-            throw new TronaldDumpException("Please specify the task number to delete.");
+            throw new TronaldDumpException("Please specify the task number to unmark.");
         }
         
         int taskNumber = Integer.parseInt(parts[1]) - 1;
         if (taskNumber >= 0 && taskNumber < taskList.getSize()) {
-            Task removedTask = taskList.removeTask(taskNumber);
-            Ui.showDeleteTask(taskList, removedTask, taskNumber);
+            taskList.unmarkTask(taskNumber);
+            Ui.showUnmarkTask(taskList, taskNumber);
         } else {
             throw new TronaldDumpException("Invalid task number.");
         }

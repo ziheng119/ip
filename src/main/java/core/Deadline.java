@@ -1,3 +1,7 @@
+package core;
+
+import util.TronaldDumpException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +14,7 @@ public class Deadline extends Task{
         super(description.split(" /by ")[0], isDone);
         String[] parts = description.split(" /by ");
         if (parts.length < 2) {
-            throw new TronaldDumpException("Deadline description must include a date/time after '/by'.");
+            throw new TronaldDumpException("core.Deadline description must include a date/time after '/by'.");
         }
         String dateStr = parts[1].trim();
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

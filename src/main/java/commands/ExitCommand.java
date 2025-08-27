@@ -1,3 +1,9 @@
+package commands;
+
+import core.TaskList;
+import util.Storage;
+import util.TronaldDumpException;
+
 public class ExitCommand extends Command {
     
     public ExitCommand(TaskList taskList, Storage storage) {

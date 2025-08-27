@@ -1,3 +1,13 @@
+package core;
+
+import commands.Command;
+import commands.CommandFactory;
+import commands.ExitCommand;
+import commands.ListCommand;
+import util.Parser;
+import util.Storage;
+import util.TronaldDumpException;
+
 import java.util.Scanner;
 
 public class TronaldDump {
@@ -18,7 +28,10 @@ public class TronaldDump {
         while (scanner.hasNextLine()) {
             try {
                 String input = scanner.nextLine();
-                processCommand(input);
+                Command command = processCommand(input);
+                if (command.isExit()) {
+                    break;
+                }
             } catch (TronaldDumpException e) {
                 Ui.showError(e.getMessage());
             }
@@ -28,9 +41,12 @@ public class TronaldDump {
         scanner.close();
     }
     
-    private void processCommand(String input) throws TronaldDumpException {
+    private Command processCommand(String input) throws TronaldDumpException {
         String[] parts = Parser.parse(input);
-        if (parts.length == 0) return;
+        if (parts.length == 0) {
+            throw new TronaldDumpException("I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n" +
+                    "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
+        }
         
         String commandType = parts[0].toLowerCase();
         Command command = commandFactory.getCommand(commandType);
@@ -41,7 +57,7 @@ public class TronaldDump {
         }
         
         if (command.isExit()) {
-            return;
+            return command;
         }
         
         Ui.showHorizontalLine();
@@ -51,6 +67,7 @@ public class TronaldDump {
         if (!(command instanceof ListCommand) && !(command instanceof ExitCommand)) {
             storage.save(taskList.getAllTasks());
         }
+        return command;
     }
 
     public static void main(String[] args) {
