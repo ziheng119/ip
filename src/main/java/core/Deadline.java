@@ -7,9 +7,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline task with a description and a deadline date/time.
+ */
 public class Deadline extends Task{
     private LocalDateTime deadline;
 
+    /**
+     * @param description Description of the deadline task, including the deadline date/time after "/by"
+     * @param isDone Boolean indicating if the task is done
+     * @throws TronaldDumpException if the description does not contain a valid date/time after "/by"
+     */
     public Deadline(String description, boolean isDone) {
         super(description.split(" /by ")[0], isDone);
         String[] parts = description.split(" /by ");
@@ -31,14 +39,16 @@ public class Deadline extends Task{
     }
 
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
-    }
-
+    /**
+     * @return LocalDateTime representing the deadline of the task
+     */
     public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
+    /**
+     * @return String representation of the task for storage in the file
+     */
     @Override
     public String toStorageString() {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -51,6 +61,9 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * @return String representation of the task for display to the user
+     */
     @Override
     public String toString() {
         DateTimeFormatter outputFormatWithTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");

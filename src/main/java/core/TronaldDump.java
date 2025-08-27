@@ -10,6 +10,9 @@ import util.TronaldDumpException;
 
 import java.util.Scanner;
 
+/**
+ * Main class for the TronaldDump chatbot application.
+ */
 public class TronaldDump {
     private Storage storage;
     private TaskList taskList;
@@ -21,6 +24,9 @@ public class TronaldDump {
         this.commandFactory = new CommandFactory(taskList, storage);
     }
 
+    /**
+     * Runs the TronaldDump application.
+     */
     public void run() {
         Ui.showWelcome();
         Scanner scanner = new Scanner(System.in);
@@ -40,7 +46,15 @@ public class TronaldDump {
         Ui.showGoodbyeMessage();
         scanner.close();
     }
-    
+
+    /**
+     * Processes the user input and returns the corresponding Command object.
+     * Valid user inputs are "todo", "event", "deadline", "list", "mark", "unmark", "delete", and "bye".
+     * If the input is invalid, a TronaldDumpException is thrown with an appropriate error message.
+     * @param input String input from the user representing the commands given to the chatbot.
+     * @return Command object corresponding to the user input.
+     * @throws TronaldDumpException
+     */
     private Command processCommand(String input) throws TronaldDumpException {
         String[] parts = Parser.parse(input);
         if (parts.length == 0) {

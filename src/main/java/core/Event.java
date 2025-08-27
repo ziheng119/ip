@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task with a description, start date/time, and end date/time.
+ */
 public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
