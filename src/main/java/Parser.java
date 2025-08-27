@@ -3,12 +3,12 @@ public class Parser {
         return input.trim().split("\\s+");
     }
     
-    public static boolean isExitCommand(String input) {
-        return input.equalsIgnoreCase("bye");
+    public static boolean isExitCommand(String[] parts) {
+        return parts.length == 1 && parts[0].equalsIgnoreCase("bye");
     }
     
-    public static boolean isListCommand(String input) {
-        return input.equalsIgnoreCase("list");
+    public static boolean isListCommand(String[] parts) {
+        return parts.length == 1 && parts[0].equalsIgnoreCase("list");
     }
     
     public static boolean isMarkCommand(String[] parts) {

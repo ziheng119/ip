@@ -35,6 +35,7 @@ public class Ui {
         System.out.println(String.format("TASK %d IS UNMARKED.\n", taskNumber + 1));
         System.out.println(taskList.getTask(taskNumber));
         showHorizontalLine();
+        showHorizontalLine();
     }
     
     public static void showDeleteTask(TaskList taskList, Task removedTask, int taskNumber) {
