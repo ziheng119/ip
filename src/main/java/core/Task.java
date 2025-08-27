@@ -1,5 +1,8 @@
 package core;
 
+/**
+ * Abstract class representing a Task.
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -9,24 +12,45 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * @return String description of the task.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @return Boolean indicating if the task is done.
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Marks the task as not done.
+     */
     public void markAsNotDone() {
         this.isDone = false;
     }
 
+    /**
+     * @return Abstract method to convert the task to a storage string.
+     */
     public abstract String toStorageString();
 
+    /**
+     * Parses a task from a storage string and returns the corresponding Task object.
+     * @param line Task string from storage file.
+     * @return Task object corresponding to the storage string.
+     * @throws IllegalArgumentException if the task type is unknown.
+     */
     public static Task fromStorageString(String line) {
         String[] parts = line.split(" \\| ");
         switch (parts[0]) {
@@ -41,6 +65,9 @@ public abstract class Task {
         }
     }
 
+    /**
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);

@@ -6,12 +6,21 @@ import core.Ui;
 import util.Storage;
 import util.TronaldDumpException;
 
+/**
+ * Command to add a Todo task to the TaskList.
+ */
 public class TodoCommand extends Command {
     
     public TodoCommand(TaskList taskList, Storage storage) {
         super(taskList, storage);
     }
-    
+
+    /**
+     * Executes the command to add a Todo task.
+     * @param input String input from the user representing the command given to the chatbot.
+     * @param parts Array of strings obtained by splitting the input string by spaces.
+     * @throws TronaldDumpException
+     */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
         if (parts.length == 1) {

@@ -4,6 +4,9 @@ import core.TaskList;
 import util.Storage;
 import util.TronaldDumpException;
 
+/**
+ * Represents a command that can be executed by the TronaldDump chatbot.
+ */
 public abstract class Command {
     protected TaskList taskList;
     protected Storage storage;
