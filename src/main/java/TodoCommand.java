@@ -1,5 +1,3 @@
-
-
 public class TodoCommand extends Command {
     
     public TodoCommand(TaskList taskList, Storage storage) {

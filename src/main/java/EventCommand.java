@@ -1,5 +1,3 @@
-
-
 public class EventCommand extends Command {
     
     public EventCommand(TaskList taskList, Storage storage) {

@@ -1,5 +1,3 @@
-
-
 public class DeleteCommand extends Command {
     
     public DeleteCommand(TaskList taskList, Storage storage) {

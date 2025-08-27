@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Ui {
     private static final String HORIZONTAL_LINE = "________________________________\n";
 

@@ -1,5 +1,3 @@
-
-
 public class MarkCommand extends Command {
     
     public MarkCommand(TaskList taskList, Storage storage) {
