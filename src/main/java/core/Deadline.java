@@ -14,9 +14,9 @@ public class Deadline extends Task{
     private LocalDateTime deadline;
 
     /**
-     * @param description Description of the deadline task, including the deadline date/time after "/by"
-     * @param isDone Boolean indicating if the task is done
-     * @throws TronaldDumpException if the description does not contain a valid date/time after "/by"
+     * @param description Description of the deadline task, including the deadline date/time after "/by".
+     * @param isDone Boolean indicating if the task is done.
+     * @throws TronaldDumpException if the description does not contain a valid date/time after "/by".
      */
     public Deadline(String description, boolean isDone) {
         super(description.split(" /by ")[0], isDone);
@@ -40,14 +40,14 @@ public class Deadline extends Task{
 
 
     /**
-     * @return LocalDateTime representing the deadline of the task
+     * @return LocalDateTime representing the deadline of the task.
      */
     public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
     /**
-     * @return String representation of the task for storage in the file
+     * @return String representation of the task for storage in the file.
      */
     @Override
     public String toStorageString() {
@@ -62,7 +62,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * @return String representation of the task for display to the user
+     * @return String representation of the task for display to the user.
      */
     @Override
     public String toString() {

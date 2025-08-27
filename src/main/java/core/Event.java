@@ -14,6 +14,10 @@ public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
+    /**
+     * @param description Description of the event task, including start date/time after "/from" and end date/time after "/to".
+     * @param isDone Boolean indicating if the task is done.
+     */
     public Event(String description, boolean isDone) {
         super(description.split(" /from ")[0], isDone);
         String[] fromSplit = description.split(" /from ");
@@ -30,6 +34,13 @@ public class Event extends Task {
         this.endDateTime = parseDateTime(endStr);
     }
 
+    /**
+     * @param dateStr Date string to parse.
+     * Parses a date string in the format "yyyy-MM-dd" or "yyyy-MM-dd HHmm" to a LocalDateTime object.
+     * If only the date is provided, the time is set to midnight.
+     * @throws TronaldDumpException if the date string is not in a valid format.
+     * @return
+     */
     private LocalDateTime parseDateTime(String dateStr) {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
