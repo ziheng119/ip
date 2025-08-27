@@ -16,5 +16,7 @@
 ../src/main/java/commands/TodoCommand.java
 ../src/main/java/commands/MarkCommand.java
 ../src/main/java/commands/DeadlineCommand.java
+../src/main/java/commands/FindCommand.java
 ../src/main/java/commands/ExitCommand.java
 ../src/main/java/commands/CommandFactory.java
+../src/main/java/commands/FindCommand.java

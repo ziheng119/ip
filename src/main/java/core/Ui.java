@@ -42,6 +42,18 @@ public class Ui {
         System.out.println(String.format("NOW YOU HAVE %d %s IN THE LIST.\n", taskList.getSize(), taskList.getSize() == 1 ? "TASK" : "TASKS"));
         showHorizontalLine();
     }
+
+    public static void showMatchingTasks(TaskList matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.print("NO MATCHING TASKS FOUND!\n");
+        } else {
+            System.out.print("HERE ARE THE MATCHING TASKS IN YOUR LIST:\n");
+            for (int i = 0; i < matchingTasks.getSize(); i++) {
+                System.out.println(String.format("%d. %s", i + 1, matchingTasks.getTask(i).toString()));
+            }
+        }
+        showHorizontalLine();
+    }
     
     public static void showWelcome() {
         System.out.println(HORIZONTAL_LINE);

@@ -23,6 +23,7 @@ public class CommandFactory {
         commands.put("todo", new TodoCommand(taskList, storage));
         commands.put("event", new EventCommand(taskList, storage));
         commands.put("deadline", new DeadlineCommand(taskList, storage));
+        commands.put("find", new FindCommand(taskList, storage));
     }
     
     public Command getCommand(String commandType) {
