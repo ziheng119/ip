@@ -1,3 +1,11 @@
+package commands;
+
+import core.Deadline;
+import core.TaskList;
+import core.Ui;
+import util.Storage;
+import util.TronaldDumpException;
+
 public class DeadlineCommand extends Command {
     
     public DeadlineCommand(TaskList taskList, Storage storage) {

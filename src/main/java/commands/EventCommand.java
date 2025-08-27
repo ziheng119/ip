@@ -1,3 +1,11 @@
+package commands;
+
+import core.Event;
+import core.TaskList;
+import core.Ui;
+import util.Storage;
+import util.TronaldDumpException;
+
 public class EventCommand extends Command {
     
     public EventCommand(TaskList taskList, Storage storage) {

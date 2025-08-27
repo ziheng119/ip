@@ -1,3 +1,5 @@
+package core;
+
 public class Ui {
     private static final String HORIZONTAL_LINE = "________________________________\n";
 
@@ -33,7 +35,6 @@ public class Ui {
         System.out.println(String.format("TASK %d IS UNMARKED.\n", taskNumber + 1));
         System.out.println(taskList.getTask(taskNumber));
         showHorizontalLine();
-        showHorizontalLine();
     }
     
     public static void showDeleteTask(TaskList taskList, Task removedTask, int taskNumber) {
@@ -54,8 +55,10 @@ public class Ui {
     }
 
     public static void showGoodbyeMessage() {
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("THANK YOU FOR YOUR ATTENTION TO THIS MATTER!\n");
-        System.out.println("________________________________\n");
+        System.out.println(HORIZONTAL_LINE);
+
     }
     
     public static void showError(String message) {
