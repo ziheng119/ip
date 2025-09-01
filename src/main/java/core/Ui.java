@@ -56,10 +56,10 @@ public class Ui {
     }
     
     public static void showWelcome() {
-        System.out.println(HORIZONTAL_LINE);
+        showHorizontalLine();
         System.out.println("GOOD MORNING! I AM TRONALD DUMP! GOD BLESS AMERICA\n"
                 + "WHAT CAN I, THIS BEAUTIFUL MAN, DO FOR YOU?\n");
-        System.out.println(HORIZONTAL_LINE);
+        showHorizontalLine();
     }
 
     public static void showHorizontalLine() {
@@ -67,7 +67,6 @@ public class Ui {
     }
 
     public static void showGoodbyeMessage() {
-        System.out.println(HORIZONTAL_LINE);
         System.out.println("THANK YOU FOR YOUR ATTENTION TO THIS MATTER!\n");
         System.out.println(HORIZONTAL_LINE);
 

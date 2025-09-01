@@ -39,6 +39,7 @@ public class TronaldDump {
                     break;
                 }
             } catch (TronaldDumpException e) {
+
                 Ui.showError(e.getMessage());
             }
         }
@@ -57,7 +58,9 @@ public class TronaldDump {
      */
     private Command processCommand(String input) throws TronaldDumpException {
         String[] parts = Parser.parse(input);
+        Ui.showHorizontalLine();
         if (parts.length == 0) {
+
             throw new TronaldDumpException("I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n" +
                     "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
         }
@@ -73,8 +76,6 @@ public class TronaldDump {
         if (command.isExit()) {
             return command;
         }
-        
-        Ui.showHorizontalLine();
         command.execute(input, parts);
         
         // Save after any modification (except for list and exit commands)
