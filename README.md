@@ -33,68 +33,83 @@ The following commands are supported by TronaldDump:
 8. **`find <keyword>`** - Search for tasks containing the keyword
 9. **`bye`** - Exit the application
 
-# Example interaction with TronaldDump
+## 💻 Example Interaction
 
----
+```bash
+# Example interaction with TronaldDump
+________________________________
 
 GOOD MORNING! I AM TRONALD DUMP! GOD BLESS AMERICA
 WHAT CAN I, THIS BEAUTIFUL MAN, DO FOR YOU?
 
----
+________________________________
 
 > todo Buy groceries
-
----
+________________________________
 
 OKAY. I HAVE ADDED THIS TASK:
-[T] [ ] Buy groceries
+ [T] [ ] Buy groceries
 NOW YOU HAVE 3 TASKS IN THE LIST.
 
----
+________________________________
 
 > deadline Submit report /by 2024-12-31
-
----
+________________________________
 
 OKAY. I HAVE ADDED THIS TASK:
-[D] [ ] Submit report (by: Dec 31 2024)
+ [D] [ ] Submit report (by: Dec 31 2024)
 NOW YOU HAVE 4 TASKS IN THE LIST.
 
----
+________________________________
 
 > list
-
----
+________________________________
 
 HERE ARE THE TASKS IN YOUR LIST:
-
 1. [T] [ ] eat
 2. [T] [X] sleep
 3. [T] [ ] Buy groceries
 4. [D] [ ] Submit report (by: Dec 31 2024)
-
----
+________________________________
 
 > mark 1
-
----
+________________________________
 
 GOOD JOB! TASK 1 IS MARKED AS DONE.
 
 [T] [X] eat
-
----
+________________________________
 
 > bye
-
----
+________________________________
 
 THANK YOU FOR YOUR ATTENTION TO THIS MATTER!
 
----
-
+________________________________
 ```
+
+## ✅ Development Tasks
+
+- [x] Implement basic task management functionality
+- [x] Add persistent storage with file I/O
+- [x] Create command factory pattern
+- [x] Implement all task types (Todo, Event, Deadline)
+- [x] Add error handling with custom exceptions
+- [x] Create comprehensive test suite
+- [ ] Add GUI interface
+
+## 🔧 Configuration
+
+The application automatically creates a `data/tronalddump.txt` file to store tasks persistently. No additional configuration is required.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 **Note**: This chatbot has a _unique_ personality. Don't take the error messages too seriously! 😄
 
-```
+For more information, visit the [project repository](https://github.com/ziheng119/ip).
