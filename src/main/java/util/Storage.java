@@ -1,16 +1,28 @@
-package util;// src/main/java/util.Storage.java
+package util; // src/main/java/util.Storage.java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import core.Task;
 import core.TaskList;
 
-import java.nio.file.*;
-import java.io.*;
-import java.util.*;
-
+/**
+ * Handles file I/O operations for persistent storage of tasks.
+ * Manages saving and loading tasks to/from a text file.
+ */
 public class Storage {
     private static final String DIR = "data";
     private static final String FILE = "tronalddump.txt";
     private final Path filePath;
 
+    /**
+     * Constructor for Storage class.
+     * Initializes the file path and creates the storage file if it doesn't exist.
+     */
     public Storage() {
         this.filePath = Paths.get(DIR, FILE);
         createFileIfMissing();
@@ -29,6 +41,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file.
+     * @return TaskList containing all loaded tasks
+     */
     public TaskList load() {
         TaskList tasks = new TaskList();
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
@@ -50,13 +66,17 @@ public class Storage {
         return tasks;
     }
 
-    // Data format: TYPE | isDone | description (includes all information aka deadlines, event times)
+    /**
+     * Saves tasks to the storage file.
+     * Data format: TYPE | isDone | description (includes all information aka deadlines, event times)
+     * @param tasks List of tasks to save
+     */
     public void save(List<Task> tasks) {
         if (tasks == null) {
             System.err.println("Cannot save null task list");
             return;
         }
-        
+
         try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
             for (Task task : tasks) {
                 if (task != null) {
@@ -68,7 +88,7 @@ public class Storage {
             System.err.println("Error saving tasks: " + e.getMessage());
         }
     }
-    
+
     public boolean isFileAccessible() {
         return Files.exists(filePath) && Files.isReadable(filePath) && Files.isWritable(filePath);
     }

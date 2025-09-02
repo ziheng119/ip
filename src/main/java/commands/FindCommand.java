@@ -5,6 +5,10 @@ import core.Ui;
 import util.Storage;
 import util.TronaldDumpException;
 
+/**
+ * Command to search for tasks containing a specific keyword.
+ * Displays all tasks that match the search criteria.
+ */
 public class FindCommand extends Command {
 
     public FindCommand(TaskList taskList, Storage storage) {

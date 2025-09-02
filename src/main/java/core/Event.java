@@ -1,11 +1,11 @@
 package core;
 
-import util.TronaldDumpException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import util.TronaldDumpException;
 
 /**
  * Represents an event task with a description, start date/time, and end date/time.
@@ -15,18 +15,20 @@ public class Event extends Task {
     private LocalDateTime endDateTime;
 
     /**
-     * @param description Description of the event task, including start date/time after "/from" and end date/time after "/to".
+     * @param description Description of the event task with start and end times
      * @param isDone Boolean indicating if the task is done.
      */
     public Event(String description, boolean isDone) {
         super(description.split(" /from ")[0], isDone);
         String[] fromSplit = description.split(" /from ");
         if (fromSplit.length < 2) {
-            throw new TronaldDumpException("Event description must include both start date/time after '/from' and end date/time after '/to'.");
+            throw new TronaldDumpException(
+                    "Event description must include both start date/time after '/from' and end date/time after '/to'.");
         }
         String[] toSplit = fromSplit[1].split(" /to ");
         if (toSplit.length < 2) {
-            throw new TronaldDumpException("Event description must include both start date/time after '/from' and end date/time after '/to'.");
+            throw new TronaldDumpException(
+                    "Event description must include both start date/time after '/from' and end date/time after '/to'.");
         }
         String startStr = toSplit[0].trim();
         String endStr = toSplit[1].trim();
@@ -35,11 +37,11 @@ public class Event extends Task {
     }
 
     /**
-     * @param dateStr Date string to parse.
      * Parses a date string in the format "yyyy-MM-dd" or "yyyy-MM-dd HHmm" to a LocalDateTime object.
      * If only the date is provided, the time is set to midnight.
-     * @throws TronaldDumpException if the date string is not in a valid format.
-     * @return
+     * @param dateStr Date string to parse
+     * @return LocalDateTime object representing the parsed date/time
+     * @throws TronaldDumpException if the date string is not in a valid format
      */
     private LocalDateTime parseDateTime(String dateStr) {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -81,7 +83,8 @@ public class Event extends Task {
         String end = endDateTime.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)
                 ? endDateTime.toLocalDate().format(dateFormat)
                 : endDateTime.format(dateTimeFormat);
-        return "E | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /from " + start + " /to " + end;
+        return "E | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /from " + start
+                + " /to " + end;
     }
 
     @Override

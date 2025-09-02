@@ -10,7 +10,7 @@ import util.TronaldDumpException;
  * Command to add an event task to the task list.
  */
 public class EventCommand extends Command {
-    
+
     public EventCommand(TaskList taskList, Storage storage) {
         super(taskList, storage);
     }
@@ -26,11 +26,11 @@ public class EventCommand extends Command {
         if (parts.length == 1) {
             throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE EVENT TASK!");
         }
-        
+
         taskList.addTask(new Event(input.substring(6), false));
         Ui.showAddTask(taskList);
     }
-    
+
     @Override
     public boolean isExit() {
         return false;

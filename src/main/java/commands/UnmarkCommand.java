@@ -9,7 +9,7 @@ import util.TronaldDumpException;
  * Command to unmark a task as not completed in the TaskList.
  */
 public class UnmarkCommand extends Command {
-    
+
     public UnmarkCommand(TaskList taskList, Storage storage) {
         super(taskList, storage);
     }
@@ -25,7 +25,7 @@ public class UnmarkCommand extends Command {
         if (parts.length != 2) {
             throw new TronaldDumpException("Please specify the task number to unmark.");
         }
-        
+
         int taskNumber = Integer.parseInt(parts[1]) - 1;
         if (taskNumber >= 0 && taskNumber < taskList.getSize()) {
             taskList.unmarkTask(taskNumber);
@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
             throw new TronaldDumpException("Invalid task number.");
         }
     }
-    
+
     @Override
     public boolean isExit() {
         return false;

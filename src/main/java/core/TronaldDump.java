@@ -1,5 +1,7 @@
 package core;
 
+import java.util.Scanner;
+
 import commands.Command;
 import commands.CommandFactory;
 import commands.ExitCommand;
@@ -7,8 +9,6 @@ import commands.ListCommand;
 import util.Parser;
 import util.Storage;
 import util.TronaldDumpException;
-
-import java.util.Scanner;
 
 /**
  * Main class for the TronaldDump chatbot application.
@@ -18,6 +18,10 @@ public class TronaldDump {
     private TaskList taskList;
     private CommandFactory commandFactory;
 
+    /**
+     * Constructor for TronaldDump class.
+     * Initializes storage, loads existing tasks, and creates the command factory.
+     */
     public TronaldDump() {
         this.storage = new Storage();
         this.taskList = storage.load();
@@ -30,7 +34,7 @@ public class TronaldDump {
     public void run() {
         Ui.showWelcome();
         Scanner scanner = new Scanner(System.in);
-        
+
         while (scanner.hasNextLine()) {
             try {
                 String input = scanner.nextLine();
@@ -43,7 +47,7 @@ public class TronaldDump {
                 Ui.showError(e.getMessage());
             }
         }
-        
+
         Ui.showGoodbyeMessage();
         scanner.close();
     }
@@ -61,23 +65,25 @@ public class TronaldDump {
         Ui.showHorizontalLine();
         if (parts.length == 0) {
 
-            throw new TronaldDumpException("I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n" +
-                    "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
+            throw new TronaldDumpException(
+                    "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
+                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
         }
-        
+
         String commandType = parts[0].toLowerCase();
         Command command = commandFactory.getCommand(commandType);
-        
+
         if (command == null) {
-            throw new TronaldDumpException("I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n" +
-                    "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
+            throw new TronaldDumpException(
+                    "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
+                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
         }
-        
+
         if (command.isExit()) {
             return command;
         }
         command.execute(input, parts);
-        
+
         // Save after any modification (except for list and exit commands)
         if (!(command instanceof ListCommand) && !(command instanceof ExitCommand)) {
             storage.save(taskList.getAllTasks());
