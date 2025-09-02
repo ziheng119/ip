@@ -1,5 +1,7 @@
 package core;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import commands.Command;
@@ -60,7 +62,7 @@ public class TronaldDump {
      * @return Command object corresponding to the user input.
      * @throws TronaldDumpException
      */
-    private Command processCommand(String input) throws TronaldDumpException {
+    public Command processCommand(String input) throws TronaldDumpException {
         String[] parts = Parser.parse(input);
         Ui.showHorizontalLine();
         if (parts.length == 0) {
@@ -79,10 +81,12 @@ public class TronaldDump {
                             + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
         }
 
+        // Execute the command (including exit commands) to capture their output
+        command.execute(input, parts);
+        
         if (command.isExit()) {
             return command;
         }
-        command.execute(input, parts);
 
         // Save after any modification (except for list and exit commands)
         if (!(command instanceof ListCommand) && !(command instanceof ExitCommand)) {
@@ -93,5 +97,47 @@ public class TronaldDump {
 
     public static void main(String[] args) {
         new TronaldDump().run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            // Capture the actual output from commands
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(outputStream));
+            
+            // Process the command (this will print to our captured stream)
+            Command command = processCommand(input);
+            
+            // Restore original System.out
+            System.setOut(originalOut);
+            
+            // Get the captured output
+            String capturedOutput = outputStream.toString();
+            
+            // If it's an exit command, show goodbye message
+            // if (command.isExit()) {
+            //     // Call the goodbye message method to capture its output
+            //     Ui.showGoodbyeMessage();
+                
+            //     // Capture the goodbye message output
+            //     String goodbyeOutput = outputStream.toString().trim();
+                
+            //     // Restore original System.out
+            //     System.setOut(originalOut);
+                
+            //     return goodbyeOutput;
+            // }
+            
+            // Return the actual captured output, or a default message if empty
+            // if (capturedOutput.isEmpty()) {
+            //     return "Command executed successfully!";
+            // }
+            
+            return capturedOutput;
+            
+        } catch (TronaldDumpException e) {
+            return e.getMessage();
+        }
     }
 }
