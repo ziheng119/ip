@@ -3,7 +3,7 @@ package core;
 /**
  * Represents a Todo task with a description.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     public Todo(String description, boolean isDone) {
         super(description, isDone);

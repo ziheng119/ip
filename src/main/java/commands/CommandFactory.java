@@ -1,20 +1,26 @@
 package commands;
 
-import core.TaskList;
-import util.Storage;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import core.TaskList;
+import util.Storage;
 
 /**
  * Initializes and provides Command objects based on user input.
  * When chatbot is constructed, all command objects are created and stored in a map for easy retrieval.
  * These command objects are used to map user input strings to their corresponding command implementations.
- * This approach eliminates the need for multiple if-else or switch-case statements to determine which command to execute.
+ * This approach eliminates the need for multiple if-else or switch-case statements to
+ * determine which command to execute.
  */
 public class CommandFactory {
     private final Map<String, Command> commands;
-    
+
+    /**
+     * Constructor for CommandFactory class.
+     * @param taskList TaskList object that stores the list of tasks
+     * @param storage Storage object that handles loading and saving tasks to persistent storage
+     */
     public CommandFactory(TaskList taskList, Storage storage) {
         this.commands = new HashMap<>();
         initializeCommands(taskList, storage);

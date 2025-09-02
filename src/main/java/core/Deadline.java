@@ -1,16 +1,16 @@
 package core;
 
-import util.TronaldDumpException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import util.TronaldDumpException;
+
 /**
  * Represents a deadline task with a description and a deadline date/time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
@@ -55,9 +55,11 @@ public class Deadline extends Task{
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         // If time is midnight, store as date only
         if (deadline.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)) {
-            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by " + deadline.toLocalDate().format(dateFormat);
+            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by "
+                    + deadline.toLocalDate().format(dateFormat);
         } else {
-            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by " + deadline.format(dateTimeFormat);
+            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by "
+                    + deadline.format(dateTimeFormat);
         }
     }
 
@@ -69,9 +71,11 @@ public class Deadline extends Task{
         DateTimeFormatter outputFormatWithTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
         DateTimeFormatter outputFormatDateOnly = DateTimeFormatter.ofPattern("MMM dd yyyy");
         if (deadline.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)) {
-            return String.format("[D] %s (by: %s)", super.toString(), deadline.toLocalDate().format(outputFormatDateOnly));
+            return String.format("[D] %s (by: %s)", super.toString(),
+                    deadline.toLocalDate().format(outputFormatDateOnly));
         } else {
-            return String.format("[D] %s (by: %s)", super.toString(), deadline.format(outputFormatWithTime));
+            return String.format("[D] %s (by: %s)", super.toString(),
+                    deadline.format(outputFormatWithTime));
         }
     }
 }

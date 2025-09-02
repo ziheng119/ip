@@ -2,13 +2,26 @@ package core;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a collection of tasks.
+ * Provides methods for adding, removing, marking, and searching tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList class.
+     * Initializes an empty task list.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList class.
+     * Initializes a task list with existing tasks.
+     * @param tasks ArrayList of tasks to initialize with
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
