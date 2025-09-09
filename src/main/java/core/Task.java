@@ -57,7 +57,12 @@ public abstract class Task {
      * @throws IllegalArgumentException if the task type is unknown.
      */
     public static Task fromStorageString(String line) {
+        assert line != null : "Storage line should not be null";
+        
         String[] parts = line.split(" \\| ");
+        
+        assert parts.length >= 3 : "Storage line should have at least 3 parts";
+        
         switch (parts[0]) {
         case "T":
             return new Todo(parts[2], parts[1].equals("1"));

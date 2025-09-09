@@ -92,6 +92,9 @@ public class TronaldDump {
         if (!(command instanceof ListCommand) && !(command instanceof ExitCommand)) {
             storage.save(taskList.getAllTasks());
         }
+        
+
+        assert command != null : "Command should not be null after processing";
         return command;
     }
 
@@ -100,6 +103,8 @@ public class TronaldDump {
     }
 
     public String getResponse(String input) {
+        assert input != null : "Input should not be null in getResponse";
+        
         try {
             // Capture the actual output from commands
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -114,6 +119,8 @@ public class TronaldDump {
             
             // Get the captured output
             String capturedOutput = outputStream.toString();
+            
+            assert capturedOutput != null : "Captured output should not be null";
             
             // If it's an exit command, show goodbye message
             // if (command.isExit()) {

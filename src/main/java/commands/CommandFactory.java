@@ -22,8 +22,13 @@ public class CommandFactory {
      * @param storage Storage object that handles loading and saving tasks to persistent storage
      */
     public CommandFactory(TaskList taskList, Storage storage) {
+        assert taskList != null : "TaskList should not be null";
+        assert storage != null : "Storage should not be null";
+        
         this.commands = new HashMap<>();
         initializeCommands(taskList, storage);
+        
+        assert this.commands != null : "Commands map should not be null after initialization";
     }
 
     /**
@@ -49,6 +54,8 @@ public class CommandFactory {
      * @return Corresponding Command object, or null if the command type is invalid.
      */
     public Command getCommand(String commandType) {
+        assert commandType != null : "Command type should not be null";
+        
         return commands.get(commandType.toLowerCase());
     }
 }
