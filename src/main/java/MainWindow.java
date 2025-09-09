@@ -29,7 +29,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Auto-scroll to bottom when dialog container height changes
+        dialogContainer.heightProperty().addListener((observable) -> {
+            scrollPane.setVvalue(1.0);
+        });
         
         // Load images safely here
         userImage = new Image(getClass().getResourceAsStream("/user.png"));
@@ -67,8 +70,5 @@ public class MainWindow extends AnchorPane {
         );
         
         userInput.clear();
-        
-        // Auto-scroll to bottom
-        scrollPane.setVvalue(1.0);
     }
 }
