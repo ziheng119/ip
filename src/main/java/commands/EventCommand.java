@@ -23,8 +23,9 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForInvalidInputEventTask = "I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE EVENT TASK!";
         if (parts.length == 1) {
-            throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE EVENT TASK!");
+            throw new TronaldDumpException(errorMessageForInvalidInputEventTask);
         }
 
         taskList.addTask(new Event(input.substring(6), false));

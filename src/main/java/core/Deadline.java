@@ -21,8 +21,9 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone) {
         super(description.split(" /by ")[0], isDone);
         String[] parts = description.split(" /by ");
+        String errorMessageForInvalidDeadlineDescription = "Deadline description must include a date/time after '/by'.";
         if (parts.length < 2) {
-            throw new TronaldDumpException("Deadline description must include a date/time after '/by'.");
+            throw new TronaldDumpException(errorMessageForInvalidDeadlineDescription);
         }
         String dateStr = parts[1].trim();
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -32,8 +33,10 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e1) {
             try {
                 this.deadline = LocalDate.parse(dateStr, dateFormat).atStartOfDay();
+            
             } catch (DateTimeParseException e2) {
-                throw new TronaldDumpException("Invalid date format! Please use yyyy-MM-dd or yyyy-MM-dd HHmm.");
+                String errorMessageForInvalidDateFormat = "Invalid date format! Please use yyyy-MM-dd or yyyy-MM-dd HHmm.";
+                throw new TronaldDumpException(errorMessageForInvalidDateFormat);
             }
         }
     }
@@ -53,12 +56,13 @@ public class Deadline extends Task {
     public String toStorageString() {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String deadlineDescriptionForStorage = "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by ";
         // If time is midnight, store as date only
         if (deadline.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)) {
-            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by "
+            return deadlineDescriptionForStorage
                     + deadline.toLocalDate().format(dateFormat);
         } else {
-            return "D | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /by "
+            return deadlineDescriptionForStorage
                     + deadline.format(dateTimeFormat);
         }
     }

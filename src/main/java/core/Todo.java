@@ -14,7 +14,8 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T] %s", super.toString());
+        String todoDescriptionForDisplay = String.format("[T] %s", super.toString());
+        return todoDescriptionForDisplay;
     }
 
     /**
@@ -22,6 +23,7 @@ public class Todo extends Task {
      */
     @Override
     public String toStorageString() {
-        return "T | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription();
+        String todoDescriptionForStorage = "T | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription();
+        return todoDescriptionForStorage;
     }
 }
