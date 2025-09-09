@@ -21,14 +21,15 @@ public class Event extends Task {
     public Event(String description, boolean isDone) {
         super(description.split(" /from ")[0], isDone);
         String[] fromSplit = description.split(" /from ");
+        String errorMessageForInvalidEventDescription = "Event description must include both start date/time after '/from' and end date/time after '/to'.";
         if (fromSplit.length < 2) {
             throw new TronaldDumpException(
-                    "Event description must include both start date/time after '/from' and end date/time after '/to'.");
+                    errorMessageForInvalidEventDescription);
         }
         String[] toSplit = fromSplit[1].split(" /to ");
         if (toSplit.length < 2) {
             throw new TronaldDumpException(
-                    "Event description must include both start date/time after '/from' and end date/time after '/to'.");
+                    errorMessageForInvalidEventDescription);
         }
         String startStr = toSplit[0].trim();
         String endStr = toSplit[1].trim();
@@ -52,7 +53,8 @@ public class Event extends Task {
             try {
                 return LocalDate.parse(dateStr, dateFormat).atStartOfDay();
             } catch (DateTimeParseException e2) {
-                throw new TronaldDumpException("Invalid date format! Please use yyyy-MM-dd or yyyy-MM-dd HHmm.");
+                String errorMessageForInvalidDateFormat = "Invalid date format! Please use yyyy-MM-dd or yyyy-MM-dd HHmm.";
+                throw new TronaldDumpException(errorMessageForInvalidDateFormat);
             }
         }
     }
@@ -83,8 +85,8 @@ public class Event extends Task {
         String end = endDateTime.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)
                 ? endDateTime.toLocalDate().format(dateFormat)
                 : endDateTime.format(dateTimeFormat);
-        return "E | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /from " + start
-                + " /to " + end;
+        String eventDescriptionForStorage = "E | " + (this.isDone() ? "1" : "0") + " | " + this.getDescription() + " /from " + start + " /to " + end;
+        return eventDescriptionForStorage;
     }
 
     @Override
@@ -97,6 +99,7 @@ public class Event extends Task {
         String end = endDateTime.toLocalTime().equals(java.time.LocalTime.MIDNIGHT)
                 ? endDateTime.toLocalDate().format(outputFormatDateOnly)
                 : endDateTime.format(outputFormatWithTime);
-        return String.format("[E] %s (from: %s to: %s)", super.toString(), start, end);
+        String eventDescriptionForDisplay = String.format("[E] %s (from: %s to: %s)", super.toString(), start, end);
+        return eventDescriptionForDisplay;
     }
 }

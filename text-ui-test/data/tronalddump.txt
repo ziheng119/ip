@@ -1,2 +1,1 @@
-D | 0 | return book /by 2025-01-03 2359
-E | 0 | project meeting /from 2025-01-04 1800 /to 2025-01-04
+T | 0 | sleep

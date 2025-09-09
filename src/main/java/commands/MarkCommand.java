@@ -22,17 +22,21 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForMarkTaskNoTaskNumber = "Please specify the task number to mark.";
         if (parts.length != 2) {
-            throw new TronaldDumpException("Please specify the task number to mark.");
+            throw new TronaldDumpException(errorMessageForMarkTaskNoTaskNumber);
         }
 
         int taskNumber = Integer.parseInt(parts[1]) - 1;
-        if (taskNumber >= 0 && taskNumber < taskList.getSize()) {
-            taskList.markTask(taskNumber);
-            Ui.showMarkTask(taskList, taskNumber);
-        } else {
-            throw new TronaldDumpException("Invalid task number.");
+        String errorMessageForMarkTaskInvalidTaskNumber = "Invalid task number.";
+        
+        if (taskNumber < 0 || taskNumber >= taskList.getSize()) {
+            throw new TronaldDumpException(errorMessageForMarkTaskInvalidTaskNumber);
         }
+       
+        taskList.markTask(taskNumber);
+        Ui.showMarkTask(taskList, taskNumber);
+    
     }
 
     @Override

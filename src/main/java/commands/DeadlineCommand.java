@@ -23,9 +23,10 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForInvalidInputDeadlineTask = "I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE DEADLINE TASK!";
         if (parts.length == 1) {
             throw new TronaldDumpException(
-                    "I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE DEADLINE TASK!");
+                    errorMessageForInvalidInputDeadlineTask);
         }
 
         taskList.addTask(new Deadline(input.substring(9), false));
