@@ -8,6 +8,8 @@
 ../src/main/java/util/Storage.java
 ../src/main/java/util/Parser.java
 ../src/main/java/util/TronaldDumpException.java
+../src/main/java/DialogBox.java
+../src/main/java/Main.java
 ../src/main/java/commands/EventCommand.java
 ../src/main/java/commands/DeleteCommand.java
 ../src/main/java/commands/UnmarkCommand.java
@@ -19,3 +21,5 @@
 ../src/main/java/commands/FindCommand.java
 ../src/main/java/commands/ExitCommand.java
 ../src/main/java/commands/CommandFactory.java
+../src/main/java/MainWindow.java
+../src/main/java/Launcher.java

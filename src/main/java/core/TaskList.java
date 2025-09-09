@@ -33,8 +33,9 @@ public class TaskList {
      * @throws IllegalArgumentException if the task is null.
      */
     public void addTask(Task task) {
+        String errorMessageForTaskCannotBeNull = "Task cannot be null";
         if (task == null) {
-            throw new IllegalArgumentException("Task cannot be null");
+            throw new IllegalArgumentException(errorMessageForTaskCannotBeNull);
         }
         tasks.add(task);
     }
@@ -45,8 +46,9 @@ public class TaskList {
      * @throws IndexOutOfBoundsException
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
+        String errorMessageForTaskIndexOutOfBounds = "Task index " + (index + 1) + " is out of bounds";
         if (index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException("Task index " + (index + 1) + " is out of bounds");
+            throw new IndexOutOfBoundsException(errorMessageForTaskIndexOutOfBounds);
         }
         Task task = tasks.get(index);
         assert task != null : "Retrieved task should not be null";
@@ -59,8 +61,9 @@ public class TaskList {
      * @throws IndexOutOfBoundsException
      */
     public Task removeTask(int index) throws IndexOutOfBoundsException {
+        String errorMessageForTaskIndexOutOfBounds = "Task index " + (index + 1) + " is out of bounds";
         if (index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException("Task index " + (index + 1) + " is out of bounds");
+            throw new IndexOutOfBoundsException(errorMessageForTaskIndexOutOfBounds);
         }
         return tasks.remove(index);
     }

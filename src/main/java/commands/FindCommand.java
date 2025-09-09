@@ -17,8 +17,9 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForEmptySearchKeyword = "The search keyword cannot be empty.";
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
-            throw new TronaldDumpException("The search keyword cannot be empty.");
+            throw new TronaldDumpException(errorMessageForEmptySearchKeyword);
         }
         String keyword = parts[1].trim();
         TaskList taskList = this.taskList.findTasks(keyword);

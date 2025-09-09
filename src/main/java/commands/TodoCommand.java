@@ -23,8 +23,9 @@ public class TodoCommand extends Command {
      */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForInvalidInputTodoTask = "I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE TODO TASK!";
         if (parts.length == 1) {
-            throw new TronaldDumpException("I HATE DEMOCRATS! YOU NEED TO GIVE ME A DESCRIPTION FOR THE TODO TASK!");
+            throw new TronaldDumpException(errorMessageForInvalidInputTodoTask);
         }
 
         taskList.addTask(new Todo(input.substring(5), false));

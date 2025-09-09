@@ -34,11 +34,13 @@ public class Ui {
      * @param taskList The list containing the newly added task
      */
     public static void showAddTask(TaskList taskList) {
-        String formatted = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s",
+        String successMessage = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s",
                 taskList.getTask(taskList.getSize() - 1).toString());
-        System.out.println(formatted);
-        System.out.println(String.format("NOW YOU HAVE %d %s IN THE LIST.\n",
-                taskList.getSize(), taskList.getSize() == 1 ? "TASK" : "TASKS"));
+        System.out.println(successMessage);
+        
+        String currentTaskCountMessage = String.format("NOW YOU HAVE %d %s IN THE LIST.\n",
+                taskList.getSize(), taskList.getSize() == 1 ? "TASK" : "TASKS");
+        System.out.println(currentTaskCountMessage);
         showHorizontalLine();
     }
 

@@ -23,17 +23,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(String input, String[] parts) throws TronaldDumpException {
+        String errorMessageForDeleteTaskNoTaskNumber = "Please specify the task number to delete.";
         if (parts.length != 2) {
-            throw new TronaldDumpException("Please specify the task number to delete.");
+            throw new TronaldDumpException(errorMessageForDeleteTaskNoTaskNumber);
         }
 
+        String errorMessageForDeleteTaskInvalidTaskNumber = "Invalid task number.";
         int taskNumber = Integer.parseInt(parts[1]) - 1;
-        if (taskNumber >= 0 && taskNumber < taskList.getSize()) {
-            Task removedTask = taskList.removeTask(taskNumber);
-            Ui.showDeleteTask(taskList, removedTask, taskNumber);
-        } else {
-            throw new TronaldDumpException("Invalid task number.");
+        if (taskNumber < 0 || taskNumber >= taskList.getSize()) {
+            throw new TronaldDumpException(errorMessageForDeleteTaskInvalidTaskNumber);
         }
+        
+        Task removedTask = taskList.removeTask(taskNumber);
+        Ui.showDeleteTask(taskList, removedTask, taskNumber);
+        
     }
 
     @Override

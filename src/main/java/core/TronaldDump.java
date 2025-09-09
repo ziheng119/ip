@@ -50,7 +50,6 @@ public class TronaldDump {
             }
         }
 
-        Ui.showGoodbyeMessage();
         scanner.close();
     }
 
@@ -63,13 +62,13 @@ public class TronaldDump {
      * @throws TronaldDumpException
      */
     public Command processCommand(String input) throws TronaldDumpException {
+        String errorMessageForInvalidInput = "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
+                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!";
         String[] parts = Parser.parse(input);
         Ui.showHorizontalLine();
         if (parts.length == 0) {
-
             throw new TronaldDumpException(
-                    "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
-                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
+                    errorMessageForInvalidInput);
         }
 
         String commandType = parts[0].toLowerCase();
@@ -77,8 +76,7 @@ public class TronaldDump {
 
         if (command == null) {
             throw new TronaldDumpException(
-                    "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
-                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!");
+                    errorMessageForInvalidInput);
         }
 
         // Execute the command (including exit commands) to capture their output
@@ -88,13 +86,9 @@ public class TronaldDump {
             return command;
         }
 
-        // Save after any modification (except for list and exit commands)
-        if (!(command instanceof ListCommand) && !(command instanceof ExitCommand)) {
-            storage.save(taskList.getAllTasks());
-        }
-        
-
         assert command != null : "Command should not be null after processing";
+        // Save after every command execution
+        storage.save(taskList.getAllTasks());
         return command;
     }
 
@@ -112,7 +106,7 @@ public class TronaldDump {
             System.setOut(new PrintStream(outputStream));
             
             // Process the command (this will print to our captured stream)
-            Command command = processCommand(input);
+            processCommand(input);
             
             // Restore original System.out
             System.setOut(originalOut);
@@ -121,28 +115,9 @@ public class TronaldDump {
             String capturedOutput = outputStream.toString();
             
             assert capturedOutput != null : "Captured output should not be null";
-            
-            // If it's an exit command, show goodbye message
-            // if (command.isExit()) {
-            //     // Call the goodbye message method to capture its output
-            //     Ui.showGoodbyeMessage();
-                
-            //     // Capture the goodbye message output
-            //     String goodbyeOutput = outputStream.toString().trim();
-                
-            //     // Restore original System.out
-            //     System.setOut(originalOut);
-                
-            //     return goodbyeOutput;
-            // }
-            
-            // Return the actual captured output, or a default message if empty
-            // if (capturedOutput.isEmpty()) {
-            //     return "Command executed successfully!";
-            // }
-            
+
             return capturedOutput;
-            
+
         } catch (TronaldDumpException e) {
             return e.getMessage();
         }
