@@ -23,7 +23,9 @@ public class TaskList {
      * @param tasks ArrayList of tasks to initialize with
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks parameter should not be null";
         this.tasks = new ArrayList<>(tasks);
+        assert this.tasks != null : "Tasks list should not be null after initialization";
     }
 
     /**
@@ -48,7 +50,9 @@ public class TaskList {
         if (index < 0 || index >= tasks.size()) {
             throw new IndexOutOfBoundsException(errorMessageForTaskIndexOutOfBounds);
         }
-        return tasks.get(index);
+        Task task = tasks.get(index);
+        assert task != null : "Retrieved task should not be null";
+        return task;
     }
 
     /**
@@ -108,12 +112,17 @@ public class TaskList {
      * @return TaskList of tasks matching the keyword.
      */
     public TaskList findTasks(String keyword) {
+        assert keyword != null : "Keyword should not be null";
+        
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 matchingTasks.addTask(task);
             }
         }
+        
+
+        assert matchingTasks != null : "Matching tasks list should not be null";
         return matchingTasks;
     }
 }
