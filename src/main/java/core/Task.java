@@ -3,7 +3,7 @@ package core;
 /**
  * Abstract class representing a Task.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     private String description;
     private boolean isDone;
 
@@ -73,6 +73,19 @@ public abstract class Task {
         default:
             throw new IllegalArgumentException("Unknown task type: " + parts[0]);
         }
+    }
+
+    /**
+     * Compares this task with another task for ordering.
+     * The default implementation compares by description alphabetically.
+     * Subclasses should override this method for specific sorting behavior.
+     * @param other The task to compare with
+     * @return A negative integer, zero, or a positive integer as this task is less than,
+     *         equal to, or greater than the other
+     */
+    @Override
+    public int compareTo(Task other) {
+        return this.description.compareToIgnoreCase(other.description);
     }
 
     /**

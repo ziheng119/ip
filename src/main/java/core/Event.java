@@ -89,6 +89,27 @@ public class Event extends Task {
         return eventDescriptionForStorage;
     }
 
+    /**
+     * Compares this event with another task for ordering.
+     * Events are sorted chronologically by their start date/time.
+     * @param other The task to compare with
+     * @return A negative integer, zero, or a positive integer as this event is less than,
+     *         equal to, or greater than the other
+     */
+    @Override
+    public int compareTo(Task other) {
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.startDateTime.compareTo(otherEvent.startDateTime);
+        } else if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.startDateTime.compareTo(otherDeadline.getDeadline());
+        } else {
+            // For Todo tasks, events come first (earlier in sort order)
+            return -1;
+        }
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter outputFormatWithTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
