@@ -10,6 +10,23 @@ public class Todo extends Task {
     }
 
     /**
+     * Compares this todo with another task for ordering.
+     * Todos are sorted alphabetically by description.
+     * @param other The task to compare with
+     * @return A negative integer, zero, or a positive integer as this todo is less than,
+     *         equal to, or greater than the other
+     */
+    @Override
+    public int compareTo(Task other) {
+        if (other instanceof Todo) {
+            return this.getDescription().compareToIgnoreCase(other.getDescription());
+        } else {
+            // For Deadline and Event tasks, todos come last (later in sort order)
+            return 1;
+        }
+    }
+
+    /**
      * @return String representation of the Todo task for display purposes.
      */
     @Override

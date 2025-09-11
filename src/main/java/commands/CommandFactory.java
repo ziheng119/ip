@@ -46,11 +46,12 @@ public class CommandFactory {
         commands.put("event", new EventCommand(taskList, storage));
         commands.put("deadline", new DeadlineCommand(taskList, storage));
         commands.put("find", new FindCommand(taskList, storage));
+        commands.put("sort", new SortCommand(taskList, storage));
     }
 
     /**
      * @param commandType Command type as a string (e.g., "todo", "event", "deadline", "list", "mark", "unmark",
-     *                    "delete", "bye").
+     *                    "delete", "find", "sort", "bye").
      * @return Corresponding Command object, or null if the command type is invalid.
      */
     public Command getCommand(String commandType) {

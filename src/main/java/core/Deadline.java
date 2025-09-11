@@ -68,6 +68,27 @@ public class Deadline extends Task {
     }
 
     /**
+     * Compares this deadline with another task for ordering.
+     * Deadlines are sorted chronologically by their deadline date/time.
+     * @param other The task to compare with
+     * @return A negative integer, zero, or a positive integer as this deadline is less than,
+     *         equal to, or greater than the other
+     */
+    @Override
+    public int compareTo(Task other) {
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.deadline.compareTo(otherDeadline.deadline);
+        } else if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.deadline.compareTo(otherEvent.getStartDateTime());
+        } else {
+            // For Todo tasks, deadlines come first (earlier in sort order)
+            return -1;
+        }
+    }
+
+    /**
      * @return String representation of the task for display to the user.
      */
     @Override

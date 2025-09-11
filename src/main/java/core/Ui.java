@@ -37,7 +37,7 @@ public class Ui {
         String successMessage = String.format("OKAY. I HAVE ADDED THIS TASK:\n %s",
                 taskList.getTask(taskList.getSize() - 1).toString());
         System.out.println(successMessage);
-        
+
         String currentTaskCountMessage = String.format("NOW YOU HAVE %d %s IN THE LIST.\n",
                 taskList.getSize(), taskList.getSize() == 1 ? "TASK" : "TASKS");
         System.out.println(currentTaskCountMessage);
@@ -91,6 +91,22 @@ public class Ui {
             System.out.print("HERE ARE THE MATCHING TASKS IN YOUR LIST:\n");
             for (int i = 0; i < matchingTasks.getSize(); i++) {
                 System.out.println(String.format("%d. %s", i + 1, matchingTasks.getTask(i).toString()));
+            }
+        }
+        showHorizontalLine();
+    }
+
+    /**
+     * Displays all tasks in the task list after sorting.
+     * @param taskList The list of tasks to display (already sorted)
+     */
+    public static void showSortedTasks(TaskList taskList) {
+        if (taskList.isEmpty()) {
+            System.out.print("YOU HAVE NO TASKS IN YOUR LIST!\n");
+        } else {
+            System.out.print("HERE ARE YOUR TASKS SORTED:\n");
+            for (int i = 0; i < taskList.getSize(); i++) {
+                System.out.println(String.format("%d. %s", i + 1, taskList.getTask(i).toString()));
             }
         }
         showHorizontalLine();

@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Manages a collection of tasks.
@@ -120,9 +121,19 @@ public class TaskList {
                 matchingTasks.addTask(task);
             }
         }
-        
 
         assert matchingTasks != null : "Matching tasks list should not be null";
         return matchingTasks;
+    }
+
+    /**
+     * Sorts the tasks in the TaskList.
+     * The sorting order is:
+     * 1. Deadlines (sorted chronologically by deadline)
+     * 2. Events (sorted chronologically by start time)
+     * 3. Todos (sorted alphabetically by description)
+     */
+    public void sortTasks() {
+        Collections.sort(tasks);
     }
 }
