@@ -5,9 +5,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import core.TronaldDump;
+import core.Ui;
 
 /**
  * Controller for the main GUI.
@@ -43,6 +43,30 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setTronaldDump(TronaldDump d) {
         tronaldDump = d;
+        // Show welcome message after TronaldDump is set
+        showWelcomeMessage();
+    }
+
+    /**
+     * Shows the welcome message when the GUI starts.
+     */
+    private void showWelcomeMessage() {
+        String welcomeMessage = Ui.getWelcomeMessage();
+    
+        dialogContainer.getChildren().addAll(
+                DialogBox.getTronaldDumpDialog(welcomeMessage, tronaldDumpImage)
+        );
+    }
+
+    /**
+     * Shows the goodbye message before closing the application.
+     */
+    private void showGoodbyeMessage() {
+        String goodbyeMessage = Ui.getGoodbyeMessage();
+    
+        dialogContainer.getChildren().addAll(
+                DialogBox.getTronaldDumpDialog(goodbyeMessage, tronaldDumpImage)
+        );
     }
 
     /**
@@ -69,6 +93,23 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getTronaldDumpDialog(response, tronaldDumpImage)
         );
         
+        // Check if this is an exit command
+        if (isExitCommand(input)) {
+            javafx.application.Platform.exit();
+        }
+        
         userInput.clear();
+
+        
+    }
+    
+    /**
+     * Checks if the input is an exit command.
+     * @param input The user input to check
+     * @return true if the input is an exit command, false otherwise
+     */
+    private boolean isExitCommand(String input) {
+        String trimmedInput = input.trim().toLowerCase();
+        return trimmedInput.equals("bye");
     }
 }

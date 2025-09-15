@@ -123,6 +123,15 @@ public class Ui {
     }
 
     /**
+     * Returns the welcome message as a string for GUI use.
+     * @return The welcome message string
+     */
+    public static String getWelcomeMessage() {
+        return "GOOD MORNING! I AM TRONALD DUMP! GOD BLESS AMERICA\n"
+                + "WHAT CAN I, THIS BEAUTIFUL MAN, DO FOR YOU?";
+    }
+
+    /**
      * Displays a horizontal line separator.
      */
     public static void showHorizontalLine() {
@@ -135,6 +144,14 @@ public class Ui {
     public static void showGoodbyeMessage() {
         System.out.println("THANK YOU FOR YOUR ATTENTION TO THIS MATTER!\n");
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    /**
+     * Returns the goodbye message as a string for GUI use.
+     * @return The goodbye message string
+     */
+    public static String getGoodbyeMessage() {
+        return "THANK YOU FOR YOUR ATTENTION TO THIS MATTER!";
     }
 
     /**
