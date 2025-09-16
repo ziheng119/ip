@@ -34,14 +34,22 @@ public class MainWindow extends AnchorPane {
             scrollPane.setVvalue(1.0);
         });
         
-        // Load images safely here
-        userImage = new Image(getClass().getResourceAsStream("/user.png"));
-        tronaldDumpImage = new Image(getClass().getResourceAsStream("/tronalddump.png"));
+        // Load images safely with error handling
+        try {
+            userImage = new Image(getClass().getResourceAsStream("/user.png"));
+            tronaldDumpImage = new Image(getClass().getResourceAsStream("/tronalddump.png"));
+        } catch (Exception e) {
+            System.err.println("Error loading images: " + e.getMessage());
+            // Use default placeholder images or handle gracefully
+        }
     }
    
 
-    /** Injects the Duke instance */
+    /** Injects the TronaldDump instance */
     public void setTronaldDump(TronaldDump d) {
+        if (d == null) {
+            throw new IllegalArgumentException("TronaldDump instance cannot be null");
+        }
         tronaldDump = d;
         // Show welcome message after TronaldDump is set
         showWelcomeMessage();
@@ -58,19 +66,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /**
-     * Shows the goodbye message before closing the application.
-     */
-    private void showGoodbyeMessage() {
-        String goodbyeMessage = Ui.getGoodbyeMessage();
-    
-        dialogContainer.getChildren().addAll(
-                DialogBox.getTronaldDumpDialog(goodbyeMessage, tronaldDumpImage)
-        );
-    }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing TronaldDump's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -80,27 +78,56 @@ public class MainWindow extends AnchorPane {
             return; // Don't process empty input
         }
         
+        // Validate that TronaldDump instance is available
+        if (tronaldDump == null) {
+            String errorMessage = "TronaldDump instance not initialized. Please restart the application.";
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getTronaldDumpDialog(errorMessage, tronaldDumpImage)
+            );
+            userInput.clear();
+            return;
+        }
+        
         // Show user input
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage)
         );
         
-        // Process command and get response
-        String response = tronaldDump.getResponse(input);
-        
-        // Show TronaldDump response
-        dialogContainer.getChildren().addAll(
-                DialogBox.getTronaldDumpDialog(response, tronaldDumpImage)
-        );
-        
-        // Check if this is an exit command
-        if (isExitCommand(input)) {
-            javafx.application.Platform.exit();
+        try {
+            // Process command and get response
+            String response = tronaldDump.getResponse(input);
+            
+            // Show TronaldDump response
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getTronaldDumpDialog(response, tronaldDumpImage)
+            );
+            
+            // Check if this is an exit command
+            if (isExitCommand(input)) {
+                // Show goodbye message before exiting
+                String goodbyeMessage = Ui.getGoodbyeMessage();
+                // Add a small delay before exit to show goodbye message
+                javafx.concurrent.Task<Void> exitTask = new javafx.concurrent.Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Thread.sleep(1000); // 1 second delay
+                        javafx.application.Platform.exit();
+                        return null;
+                    }
+                };
+                Thread exitThread = new Thread(exitTask);
+                exitThread.setDaemon(true);
+                exitThread.start();
+            }
+        } catch (Exception e) {
+            // Handle any unexpected errors
+            String errorMessage = "An unexpected error occurred: " + e.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getTronaldDumpDialog(errorMessage, tronaldDumpImage)
+            );
         }
         
         userInput.clear();
-
-        
     }
     
     /**

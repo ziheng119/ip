@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import commands.Command;
 import commands.CommandFactory;
-import commands.ExitCommand;
-import commands.ListCommand;
 import util.Parser;
 import util.Storage;
 import util.TronaldDumpException;
@@ -55,13 +53,16 @@ public class TronaldDump {
 
     /**
      * Processes the user input and returns the corresponding Command object.
-     * Valid user inputs are "todo", "event", "deadline", "list", "mark", "unmark", "delete", and "bye".
+     * Valid user inputs are "todo", "event", "deadline", "list", "mark", "unmark", "delete", "find", "sort", and "bye".
      * If the input is invalid, a TronaldDumpException is thrown with an appropriate error message.
      * @param input String input from the user representing the commands given to the chatbot.
      * @return Command object corresponding to the user input.
      * @throws TronaldDumpException
      */
     public Command processCommand(String input) throws TronaldDumpException {
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
         String errorMessageForInvalidInput = "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
                             + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!";
         String[] parts = Parser.parse(input);
@@ -97,7 +98,9 @@ public class TronaldDump {
     }
 
     public String getResponse(String input) {
-        assert input != null : "Input should not be null in getResponse";
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
         
         try {
             // Capture the actual output from commands
@@ -111,15 +114,17 @@ public class TronaldDump {
             // Restore original System.out
             System.setOut(originalOut);
             
-            // Get the captured output
-            String capturedOutput = outputStream.toString();
+            // Get the captured output and clean it up
+            String capturedOutput = outputStream.toString().trim();
             
-            assert capturedOutput != null : "Captured output should not be null";
-
-            return capturedOutput;
+            // Return the captured output or a default message if empty
+            return capturedOutput.isEmpty() ? "Command processed successfully." : capturedOutput;
 
         } catch (TronaldDumpException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            // Handle any unexpected errors
+            return "An unexpected error occurred: " + e.getMessage();
         }
     }
 }
