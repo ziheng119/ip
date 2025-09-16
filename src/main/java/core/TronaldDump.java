@@ -64,7 +64,7 @@ public class TronaldDump {
             throw new IllegalArgumentException("Input cannot be null");
         }
         String errorMessageForInvalidInput = "I HATE DEMOCRATS! IF YOU WANT TO ADD A TASK, I ONLY UNDERSTAND TODO, EVENT, AND DEADLINE TASKS!\n"
-                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, OR BYE TO EXIT!";
+                            + "ELSE, TRY LIST, MARK, UNMARK, DELETE, FIND, SORT OR BYE TO EXIT!";
         String[] parts = Parser.parse(input);
         Ui.showHorizontalLine();
         if (parts.length == 0) {
